@@ -34,7 +34,7 @@ metadata:
 spec:
   tier: rancher-nodes
   order: 0
-  selector: environment == "development"
+  selector: (environment == "development"&&node == "etcd")
   namespaceSelector: ''
   serviceAccountSelector: ''
   ingress:
