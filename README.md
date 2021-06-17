@@ -3,6 +3,21 @@
 We are building Rancher policies based on the documentation provided by Rancher - https://rancher.com/docs/rke/latest/en/os/#ports
 If any of the ports or protocols are not correctly matched, I would contact the team at Rancher for an update on this.
 
+I'm building this scenario around a generic 3 node cluster - master, worker and etcd node:
+
+
+![Screenshot 2021-06-17 at 14 17 46](https://user-images.githubusercontent.com/82048393/122404102-d74a6680-cf76-11eb-88a3-8ee1219280e9.png)
+
+
+Automatically register your nodes as Host Endpoints (HEPS). To enable automatic host endpoints, edit the default KubeControllersConfiguration instance, and set spec.controllers.node.hostEndpoint.autoCreate to true:
+
+```
+kubectl patch kubecontrollersconfiguration default --patch='{"spec": {"controllers": {"node": {"hostEndpoint": {"autoCreate": "Enabled"}}}}}'
+```
+
+<img width="1560" alt="Screenshot 2021-06-17 at 14 14 55" src="https://user-images.githubusercontent.com/82048393/122403683-7753c000-cf76-11eb-9016-ac84ce09297c.png">
+
+
 This tutorial assumes that you already have a tier called 'rancher-nodes' in Calico Cloud:
 
 ```
