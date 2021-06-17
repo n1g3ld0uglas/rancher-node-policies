@@ -17,6 +17,15 @@ kubectl patch kubecontrollersconfiguration default --patch='{"spec": {"controlle
 
 <img width="1560" alt="Screenshot 2021-06-17 at 14 14 55" src="https://user-images.githubusercontent.com/82048393/122403683-7753c000-cf76-11eb-9016-ac84ce09297c.png">
 
+to add the label kubernetes-host to all nodes and their host endpoints:
+
+```
+kubectl label nodes --all kubernetes-host=
+```
+
+![Screenshot 2021-06-17 at 14 20 09](https://user-images.githubusercontent.com/82048393/122404637-4de76400-cf77-11eb-81d2-f63bb46b2779.png)
+
+
 
 This tutorial assumes that you already have a tier called 'rancher-nodes' in Calico Cloud:
 
