@@ -264,3 +264,10 @@ kubectl label node ip-10-0-1-227 environment=etcd
 ```
 
 ![Screenshot 2021-06-17 at 14 31 27](https://user-images.githubusercontent.com/82048393/122406788-06fa6e00-cf79-11eb-9bd9-4e5882e51e00.png)
+
+Once correctly labeled, you can see the policy applying to each host endpoint:
+
+<img width="1756" alt="Screenshot 2021-06-17 at 14 41 01" src="https://user-images.githubusercontent.com/82048393/122408405-45dcf380-cf7a-11eb-9d02-213994d950d5.png">
+
+
+
