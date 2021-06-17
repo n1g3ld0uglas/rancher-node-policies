@@ -44,6 +44,9 @@ EOF
 kubectl apply -f rancher-nodes.yaml
 ```
 
+<img width="637" alt="Screenshot 2021-06-17 at 14 22 27" src="https://user-images.githubusercontent.com/82048393/122404854-7a9b7b80-cf77-11eb-96cf-55caf84d8353.png">
+
+
 # etcd-nodes
 
 Once the tier is created, build a policy for the ETCD nodes:
@@ -107,6 +110,9 @@ EOF
 ```
 kubectl apply -f etcd-nodes.yaml
 ```
+
+<img width="637" alt="Screenshot 2021-06-17 at 14 23 41" src="https://user-images.githubusercontent.com/82048393/122405073-a74f9300-cf77-11eb-865a-8ac3ffcb077f.png">
+
 
 # Control-plane-nodes (Master Node)
 
@@ -174,6 +180,9 @@ EOF
 kubectl apply -f control-plane-nodes.yaml
 ```
 
+<img width="621" alt="Screenshot 2021-06-17 at 14 25 14" src="https://user-images.githubusercontent.com/82048393/122405314-da922200-cf77-11eb-8b74-a088b5ed16ad.png">
+
+
 # worker-nodes
 
 Finally, we can build a policy for the worker nodes:
@@ -239,3 +248,6 @@ EOF
 ```
 kubectl apply -f worker-nodes.yaml
 ```
+
+<img width="615" alt="Screenshot 2021-06-17 at 14 26 22" src="https://user-images.githubusercontent.com/82048393/122405523-09a89380-cf78-11eb-8295-509a8ff953f2.png">
+
