@@ -34,7 +34,7 @@ metadata:
 spec:
   tier: rancher-nodes
   order: 0
-  selector: (environment == "development"&&node == "etcd")
+  selector: has(kubernetes-host) && environment == 'dev'
   namespaceSelector: ''
   serviceAccountSelector: ''
   ingress:
@@ -98,7 +98,7 @@ metadata:
 spec:
   tier: rancher-nodes
   order: 100
-  selector: (environment == "development"&&node == "master")
+  selector: has(kubernetes-host) && environment == 'dev'
   namespaceSelector: ''
   serviceAccountSelector: ''
   ingress:
@@ -164,7 +164,7 @@ metadata:
 spec:
   tier: rancher-nodes
   order: 200
-  selector: (environment == "development"&&node == "worker")
+  selector: has(kubernetes-host) && environment == 'dev'
   namespaceSelector: ''
   serviceAccountSelector: ''
   ingress:
