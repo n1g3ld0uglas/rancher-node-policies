@@ -83,3 +83,69 @@ EOF
 ```
 kubectl create etcd-nodes.yaml
 ```
+
+# Control-plane-nodes (Master Node)
+
+Now proceed to build a policy for the master nodes:
+
+
+```
+cat << EOF > control-plane-nodes.yaml
+apiVersion: projectcalico.org/v3
+kind: StagedGlobalNetworkPolicy
+metadata:
+  name: rancher-nodes.control-plane-nodes
+spec:
+  tier: rancher-nodes
+  order: 100
+  selector: (environment == "development"&&node == "master")
+  namespaceSelector: ''
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        ports:
+          - '80'
+          - '443'
+          - '2376'
+          - '6443'
+          - '9099'
+          - '10250'
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        ports:
+          - '8472'
+  egress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        ports:
+          - '443'
+          - '2379'
+          - '2380'
+          - '9099'
+          - '10250'
+          - '10254'
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        ports:
+          - '8472'
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress
+EOF  
+```
+
+```
+kubectl control-plane-nodes.yaml
+```
