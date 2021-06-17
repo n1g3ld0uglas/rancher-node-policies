@@ -61,7 +61,7 @@ metadata:
 spec:
   tier: rancher-nodes
   order: 0
-  selector: has(kubernetes-host) && environment == 'dev'
+  selector: has(kubernetes-host) && environment == 'etcd'
   namespaceSelector: ''
   serviceAccountSelector: ''
   ingress:
@@ -128,7 +128,7 @@ metadata:
 spec:
   tier: rancher-nodes
   order: 100
-  selector: has(kubernetes-host) && environment == 'dev'
+  selector: has(kubernetes-host) && environment == 'master'
   namespaceSelector: ''
   serviceAccountSelector: ''
   ingress:
@@ -197,7 +197,7 @@ metadata:
 spec:
   tier: rancher-nodes
   order: 200
-  selector: has(kubernetes-host) && environment == 'dev'
+  selector: has(kubernetes-host) && environment == 'worker'
   namespaceSelector: ''
   serviceAccountSelector: ''
   ingress:
@@ -251,3 +251,16 @@ kubectl apply -f worker-nodes.yaml
 
 <img width="615" alt="Screenshot 2021-06-17 at 14 26 22" src="https://user-images.githubusercontent.com/82048393/122405523-09a89380-cf78-11eb-8295-509a8ff953f2.png">
 
+
+
+# Label based on node purpose
+
+To select a specific set of host endpoints (and their corresponding Kubernetes nodes), use a policy selector that selects a label unique to that set of host endpoints. For example, if we want to add the label environment=dev to nodes named node1 and node2:
+
+```
+kubectl label node ip-10-0-1-165 environment=master
+kubectl label node ip-10-0-1-167 environment=worker
+kubectl label node ip-10-0-1-227 environment=etcd
+```
+
+![Screenshot 2021-06-17 at 14 31 27](https://user-images.githubusercontent.com/82048393/122406788-06fa6e00-cf79-11eb-9bd9-4e5882e51e00.png)
