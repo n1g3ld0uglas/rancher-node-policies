@@ -17,7 +17,7 @@ EOF
 ```
 
 ```
-kubectl create rancher-nodes.yaml
+kubectl apply -f rancher-nodes.yaml
 ```
 
 # etcd-nodes
@@ -81,7 +81,7 @@ EOF
 ```
 
 ```
-kubectl create etcd-nodes.yaml
+kubectl apply -f etcd-nodes.yaml
 ```
 
 # Control-plane-nodes (Master Node)
@@ -147,5 +147,71 @@ EOF
 ```
 
 ```
-kubectl control-plane-nodes.yaml
+kubectl apply -f control-plane-nodes.yaml
+```
+
+# worker-nodes
+
+Finally, we can build a policy for the worker nodes:
+
+
+```
+cat << EOF > worker-nodes.yaml
+apiVersion: projectcalico.org/v3
+kind: StagedGlobalNetworkPolicy
+metadata:
+  name: rancher-nodes.worker-nodes
+spec:
+  tier: rancher-nodes
+  order: 200
+  selector: (environment == "development"&&node == "worker")
+  namespaceSelector: ''
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        ports:
+          - '22'
+          - '3389'
+          - '80'
+          - '443'
+          - '2376'
+          - '9099'
+          - '10250'
+          - '10254'
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        ports:
+          - '8472'
+  egress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        ports:
+          - '443'
+          - '6443'
+          - '9099'
+          - '10254'
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        ports:
+          - '8472'
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress
+EOF  
+```
+
+```
+kubectl apply -f worker-nodes.yaml
 ```
