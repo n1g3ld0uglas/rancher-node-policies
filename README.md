@@ -270,4 +270,9 @@ Once correctly labeled, you can see the policy applying to each host endpoint:
 <img width="1756" alt="Screenshot 2021-06-17 at 14 41 01" src="https://user-images.githubusercontent.com/82048393/122408405-45dcf380-cf7a-11eb-9d02-213994d950d5.png">
 
 
+Misdellaneous:
+
+```
+kubectl create secret generic tigera-pull-secret --from-file=.dockerconfigjson=config.json --type=kubernetes.io/dockerconfigjson -n tigera-operator
+```
 
